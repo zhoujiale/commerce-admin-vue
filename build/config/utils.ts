@@ -1,3 +1,4 @@
+import { createMemoryHistory, createWebHashHistory, createWebHistory, RouterHistory } from "vue-router"
 
 
 /**
@@ -5,7 +6,11 @@
  */
 const root: string = process.cwd()
 
+const historyModeMap: Record<Env.RouterHistoryMode,(base?:string) => RouterHistory> = {
+  hash: createWebHashHistory,
+  history: createWebHistory,
+  memory: createMemoryHistory,
+}
 
-
-export { root }
+export { root,historyModeMap }
 
