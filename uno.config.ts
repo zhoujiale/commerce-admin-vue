@@ -1,7 +1,11 @@
-import { defineConfig, presetUno, transformerDirectives, transformerVariantGroup } from "unocss";
+import type { Theme } from "@unocss/preset-uno";
+import presetUno from '@unocss/preset-uno';
+import transformerDirectives from '@unocss/transformer-directives';
+import transformerVariantGroup from '@unocss/transformer-variant-group';
+import { defineConfig } from '@unocss/vite';
+import { presetCommerceAdmin } from "./src/utils/uno-preset";
 
-
-export default defineConfig({
+export default defineConfig<Theme>({
   content: {
     pipeline: {
       exclude: ['node_modules','dist']
@@ -20,5 +24,5 @@ export default defineConfig({
     'card-wrapper': 'rd-8px shadow-sm'
   },
   transformers: [transformerDirectives(),transformerVariantGroup()],
-  presets: [presetUno({dark: 'class'},)]
+  presets: [presetUno({dark: 'class'}),presetCommerceAdmin()]
 })
