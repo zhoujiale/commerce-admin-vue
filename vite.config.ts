@@ -17,6 +17,13 @@ export default defineConfig(configEnv => {
         "@build": fileURLToPath(new URL('./build',import.meta.url))
       }
     },
+    css:{
+      preprocessorOptions: {
+        scss: {
+          additionalData: `@use "@/styles/scss/index.scss" as *;`
+        }
+      }
+    },
     define: {},
     server: {
       host: '0.0.0.0',

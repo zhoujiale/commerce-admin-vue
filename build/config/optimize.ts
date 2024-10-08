@@ -1,3 +1,7 @@
 const include: string[] = []
-const exclude: string[] = []
-export { include, exclude }
+const exclude: string[] = [
+  "@iconify-icons/ep",
+  "@iconify-icons/ri"
+]
+export { exclude, include }
+

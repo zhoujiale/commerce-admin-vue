@@ -15,7 +15,7 @@ defineOptions({
   name: 'App'
 });
 </script>
-<style scoped>
+<style lang="scss" scoped>
 .logo {
   height: 6em;
   padding: 1.5em;
@@ -27,5 +27,8 @@ defineOptions({
 }
 .logo.vue:hover {
   filter: drop-shadow(0 0 2em #42b883aa);
+}
+div {
+  background-color: $bg-color;
 }
 </style>
