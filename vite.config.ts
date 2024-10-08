@@ -1,8 +1,10 @@
+import { fileURLToPath } from 'node:url';
 import { defineConfig, loadEnv } from 'vite';
-import { root } from "./build/config/utils";
-import { include,exclude } from './build/config/optimize';
+import { exclude, include } from './build/config/optimize';
 import { setupVitePlugins } from './build/plugins';
 
+
+const root: string = process.cwd()
 // https://vitejs.dev/config/
 export default defineConfig(configEnv => {
   // plugins: [vue()],
@@ -11,7 +13,8 @@ export default defineConfig(configEnv => {
     base: viteEnv.VITE_BASE_URL,
     resolve: {
       alias: {
-
+        "@": fileURLToPath(new URL('./src',import.meta.url)),
+        "@build": fileURLToPath(new URL('./build',import.meta.url))
       }
     },
     define: {},

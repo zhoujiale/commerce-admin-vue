@@ -7,8 +7,8 @@
     "skipLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"],
-      "~/*": ["./*"]
+      "@/*": ["src/*"],
+      "@build/*": ["build/*"]
     },
     "types": ["vite/client","node"],
     /* Bundler mode */

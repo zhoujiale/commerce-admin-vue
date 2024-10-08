@@ -1,5 +1,5 @@
+import { historyModeMap } from "@build/utils";
 import { createRouter, Router, } from "vue-router";
-import { historyModeMap } from "~/build/config/utils";
 
 const {VITE_BASE_URL} = import.meta.env;
 
