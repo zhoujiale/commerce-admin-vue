@@ -1,21 +1,12 @@
-<script setup lang="ts">
-import { ref } from 'vue';
-
-defineProps<{ msg: string }>()
-
-const count = ref(0)
-</script>
-
 <template>
   <h1>{{ msg }}</h1>
 
-  <div class="card">
-    <button type="button" @click="count++">count is {{ count }}</button>
-    <p>
-      Edit
-      <code>components/HelloWorld.vue</code> to test HMR
-    </p>
-  </div>
+  <el-card class="text-left text-white border-white border-1 border-solid mt-10 bg-[#242424]">
+    <template #header>子组件</template>
+    <el-form>
+        <el-form-item label="数字:">{{ counterStore.count }}</el-form-item>
+    </el-form>
+  </el-card>
 
   <p>
     Check out
@@ -32,9 +23,14 @@ const count = ref(0)
     >.
   </p>
   <p class="read-the-docs">Click on the Vite and Vue logos to learn more</p>
-  <el-button>element</el-button>
 </template>
+<script setup lang="ts">
+import { useCounterStore } from '@/store/counter';
 
+defineProps<{ msg: string }>()
+
+const counterStore = useCounterStore()
+</script>
 <style scoped>
 .read-the-docs {
   color: #888;
