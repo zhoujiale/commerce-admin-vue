@@ -1,5 +1,5 @@
 import Axios, { type AxiosInstance, type AxiosRequestConfig } from "axios";
-import { stringify } from "querystring";
+import { ParsedUrlQueryInput, stringify } from "querystring";
 import { CommonHttpRequestConfig } from "./types";
 
 const TEN_SECONDS = 10 * 1000;
@@ -10,7 +10,7 @@ const defaultRequestConfig: AxiosRequestConfig = {
   headers: {
     'Content-Type': 'application/json;charset=utf-8'
   },
-  paramsSerializer: params => {
+  paramsSerializer: (params: ParsedUrlQueryInput | undefined) => {
     return stringify(params);
   }
 };
@@ -24,4 +24,15 @@ class CommonHttp {
   private static axiosInstance: AxiosInstance = Axios.create(defaultRequestConfig);
 
 
+  /**请求拦截 */
+  private httpInterceptorsRequest(): void {
+    CommonHttp.axiosInstance.interceptors.request.use();
+  }
+
+  /**响应拦截 */
+  private httpInterceptorsResponse(): void {
+    CommonHttp.axiosInstance.interceptors.response.use();
+  }
 }
+
+
