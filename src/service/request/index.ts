@@ -1,6 +1,6 @@
 import Axios, { type AxiosInstance, type AxiosRequestConfig } from "axios";
 import { ParsedUrlQueryInput, stringify } from "querystring";
-import { CommonHttpRequestConfig } from "./types";
+import { CommonHttpError, CommonHttpRequestConfig, CommonHttpResponse } from "./types";
 
 const TEN_SECONDS = 10 * 1000;
 
@@ -18,6 +18,11 @@ const defaultRequestConfig: AxiosRequestConfig = {
 /**通用请求响应类 */
 class CommonHttp {
 
+  constructor(){
+    this.httpInterceptorsRequest();
+    this.httpInterceptorsResponse();
+  }
+
   /**初始化配置对象 */
   private static initConfig: CommonHttpRequestConfig = {};
   /**axios 实例对象 */
@@ -26,12 +31,28 @@ class CommonHttp {
 
   /**请求拦截 */
   private httpInterceptorsRequest(): void {
-    CommonHttp.axiosInstance.interceptors.request.use();
+    CommonHttp.axiosInstance.interceptors.request.use(
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      async (config: CommonHttpRequestConfig): Promise<any> => {
+        return Promise.resolve(config);
+      },
+      error => {
+        return Promise.reject(error);
+      }
+    );
   }
 
   /**响应拦截 */
   private httpInterceptorsResponse(): void {
-    CommonHttp.axiosInstance.interceptors.response.use();
+    CommonHttp.axiosInstance.interceptors.response.use(
+      (response: CommonHttpResponse) => {
+        return response.data;
+      },
+      (error: CommonHttpError) => {
+        const $error = error;
+        return Promise.reject($error);
+      }
+    );
   }
 }
 
